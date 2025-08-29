@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <h1>Tailor a Resume</h1>
+  <form method="post" action="/tailor" class="stack">
+    {{ form.csrf_token }}
+    <div class="row">
+      <label for="url">Job posting URL</label>
+      {{ form.url(placeholder='https://jobs.example.com/posting/123') }}
+    </div>
+    <div class="row">
+      <button class="btn" type="submit">Go</button>
+    </div>
+  </form>
+</div>
+
+{% if recent and recent|length > 0 %}
+  <h2 style="margin-top:16px;">Recent</h2>
+  <div class="card">
+    <ul class="plain">
+      {% for r in recent %}
+        <li style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+          <a href="/result/{{ r.id }}">{{ r.pdf_name }}</a>
+          <form method="post" action="/delete/{{ r.id }}">
+            {{ del_form.csrf_token }}
+            <button class="btn btn-outline" type="submit">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <h1>Your Profile</h1>
+  <p class="muted">Fill what you’re comfortable sharing. Full name is required.</p>
+  <form method="post" action="/profile" class="stack">
+    {{ form.csrf_token }}
+
+    <div class="row">
+      <label for="full_name">Full name</label>
+      {{ form.full_name(placeholder='Jane Doe') }}
+    </div>
+    <div class="row">
+      <label for="city">City</label>
+      {{ form.city(placeholder='City, State') }}
+    </div>
+    <div class="row">
+      <label for="email">Email</label>
+      {{ form.email(placeholder='you@example.com') }}
+    </div>
+    <div class="row">
+      <label for="phone">Phone</label>
+      {{ form.phone(placeholder='+1 555 123 4567') }}
+    </div>
+    <div class="row">
+      <label for="web">LinkedIn/GitHub/Website</label>
+      {{ form.web(placeholder='https://www.linkedin.com/in/... or https://github.com/username or https://site.com') }}
+    </div>
+    <div class="row">
+      <label for="about">About</label>
+      {{ form.about(rows=6, placeholder='Add details to include: skills, experience highlights, tools, links, etc.') }}
+    </div>
+    <div class="row">
+      <label for="gemini_api_key">Gemini API Key</label>
+      {{ form.gemini_api_key(placeholder='AIza...') }}
+    </div>
+
+    <div class="row">
+      <button class="btn" type="submit">Save</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

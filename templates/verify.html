@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <h1>Verify</h1>
+  <p class="muted">Check your console for the 6‑digit code (dev).</p>
+  <form method="post" action="/verify" class="stack">
+    {{ form.csrf_token }}
+    {{ form.email(type='hidden') }}
+    <div class="row">
+      <label for="code">6-digit code</label>
+      {{ form.code(size=6, maxlength=6, placeholder='123456') }}
+    </div>
+    <div class="row">
+      <button class="btn" type="submit">Verify</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

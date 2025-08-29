@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+    <div>
+      <h1>Result</h1>
+      <p class="muted">Job host: <strong>{{ host }}</strong></p>
+    </div>
+    <div><span class="badge">{{ (coverage.score * 100)|round(0) }}%</span></div>
+  </div>
+
+  <div class="row" style="display:flex; gap:8px; flex-wrap:wrap;">
+    <a class="btn" href="/download/{{ row.id }}/pdf">Download PDF</a>
+    <a class="btn" href="/download/{{ row.id }}/docx">Download DOCX</a>
+    <form method="post" action="/delete/{{ row.id }}">
+      {{ del_form.csrf_token }}
+      <button class="btn btn-outline" type="submit">Delete</button>
+    </form>
+  </div>
+
+  <div class="row">
+    <h2>Coverage</h2>
+    <div class="muted">Matched vs. missing keywords</div>
+  </div>
+  <div class="row" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+    <div>
+      <strong>Hits</strong>
+      {% if coverage.hits %}
+      <ul class="plain">
+        {% for h in coverage.hits %}
+          <li>{{ h }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        <p class="muted">None</p>
+      {% endif %}
+    </div>
+    <div>
+      <strong>Misses</strong>
+      {% if coverage.misses %}
+      <ul class="plain">
+        {% for m in coverage.misses %}
+          <li>{{ m }}</li>
+        {% endfor %}
+      </ul>
+      {% else %}
+        <p class="muted">None</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
