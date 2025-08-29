@@ -19,9 +19,6 @@ Notes:
 - WeasyPrint requires Cairo/Pango system libraries. On macOS, use Homebrew to install `cairo`, `pango`, and `gdk-pixbuf`.
 - In development, the 6-digit code is printed to the console after submitting your email on the sign-in page.
 
-## Production (optional)
-
-Gunicorn entry:
 
 ```
 gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
